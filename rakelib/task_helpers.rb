@@ -25,8 +25,9 @@ module ReactOnRails
     end
 
     # Runs bundle exec using that directory's Gemfile
-    def bundle_exec(dir:, args:, env_vars: "")
-      sh_in_dir(dir, "#{env_vars} #{args}")
+    def bundle_exec(options)
+      options[:env_vars] = "" unless options.key?(:env_vars)
+      sh_in_dir(options[:dir], "#{options[:env_vars]} #{options[:args]}")
     end
 
     def generators_source_dir
