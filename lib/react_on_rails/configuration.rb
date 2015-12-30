@@ -23,31 +23,28 @@ module ReactOnRails
                   :logging_on_server, :server_renderer_pool_size,
                   :server_renderer_timeout, :raise_on_prerender_error
 
-    def initialize(server_bundle_js_file: nil, prerender: nil, replay_console: nil,
-                   generator_function: nil, trace: nil, development_mode: nil,
-                   logging_on_server: nil, server_renderer_pool_size: nil,
-                   server_renderer_timeout: nil, raise_on_prerender_error: nil)
-      if File.exist?(server_bundle_js_file)
-        self.server_bundle_js_file = server_bundle_js_file
+    def initialize(options)
+      if File.exist?(options[:server_bundle_js_file])
+        self.server_bundle_js_file = options[:server_bundle_js_file]
       else
         self.server_bundle_js_file = nil
       end
 
-      self.prerender = prerender
-      self.replay_console = replay_console
-      self.logging_on_server = logging_on_server
-      self.generator_function = generator_function
-      if development_mode.nil?
+      self.prerender = options[:prerender]
+      self.replay_console = options[:replay_console]
+      self.logging_on_server = options[:logging_on_server]
+      self.generator_function = options[:generator_function]
+      if options[:development_mode].nil?
         self.development_mode = Rails.env.development?
       else
-        self.development_mode = development_mode
+        self.development_mode = options[:development_mode]
       end
-      self.trace = trace.nil? ? Rails.env.development? : trace
-      self.raise_on_prerender_error = raise_on_prerender_error
+      self.trace = options[:trace].nil? ? Rails.env.development? : options[:trace]
+      self.raise_on_prerender_error = options[:raise_on_prerender_error]
 
       # Server rendering:
-      self.server_renderer_pool_size = self.development_mode ? 1 : server_renderer_pool_size
-      self.server_renderer_timeout = server_renderer_timeout # seconds
+      self.server_renderer_pool_size = self.development_mode ? 1 : options[:server_renderer_pool_size]
+      self.server_renderer_timeout = options[:server_renderer_timeout] # seconds
     end
   end
 end
