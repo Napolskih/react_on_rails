@@ -62,4 +62,6 @@ def run_tests_in(dir, options = {})
   rspec_args = options.fetch(:rspec_args, "")
   env_vars = %(#{options.fetch(env_vars, '')} COVERAGE=true TEST_ENV_COMMAND_NAME="#{command_name}")
   sh_in_dir(dir, "#{env_vars} bundle exec rspec #{rspec_args}")
+rescue => e
+  puts "---------------SPECS #{rspec_args} FAILED! #{e.inspect}"
 end
