@@ -6,7 +6,7 @@ include GeneratorHelper
 module ReactOnRails
   module Generators
     class BaseGenerator < Rails::Generators::Base # rubocop:disable Metrics/ClassLength
-      def hide!
+      def self.hide!
         # noop
       end
     
