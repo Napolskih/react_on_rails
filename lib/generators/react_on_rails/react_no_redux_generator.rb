@@ -5,6 +5,10 @@ include GeneratorHelper
 module ReactOnRails
   module Generators
     class ReactNoReduxGenerator < Rails::Generators::Base
+      def self.hide!
+        # noop
+      end  
+      
       hide!
       source_root(File.expand_path("../templates", __FILE__))
 
