@@ -1,27 +1,26 @@
 module ReactOnRails
   class PrerenderError < RuntimeError
     # err might be nil if JS caught the error
-    def initialize(component_name: nil, err: nil, props: nil,
-                   js_code: nil, console_messages: nil)
+    def initialize(options)
       message = "ERROR in SERVER PRERENDERING\n"
-      if err
+      if options[:err]
         message << <<-MSG
 Encountered error: \"#{err}\"
         MSG
-        backtrace = err.backtrace.join("\n")
+        backtrace = options[:err].backtrace.join("\n")
       else
         backtrace = nil
       end
       message << <<-MSG
-when prerendering #{component_name} with props: #{props}
+when prerendering #{options[:component_name]} with props: #{options[:props]}
 js_code was:
-#{js_code}
+#{options[:js_code]}
       MSG
 
-      if console_messages
+      if options[:console_messages]
         message << <<-MSG
 console messages:
-#{console_messages}
+#{options[:console_messages]}
         MSG
       end
 
