@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :data
+  before_filter :data
 
   rescue_from ReactOnRails::PrerenderError do |err|
     Rails.logger.error(err.message)
