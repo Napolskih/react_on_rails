@@ -6,6 +6,10 @@ include GeneratorHelper
 module ReactOnRails
   module Generators
     class BaseGenerator < Rails::Generators::Base # rubocop:disable Metrics/ClassLength
+      def hide!
+        # noop
+      end
+    
       hide!
       source_root(File.expand_path("../templates", __FILE__))
 
