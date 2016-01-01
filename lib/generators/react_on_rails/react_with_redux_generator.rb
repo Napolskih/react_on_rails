@@ -3,6 +3,10 @@ require "rails/generators"
 module ReactOnRails
   module Generators
     class ReactWithReduxGenerator < Rails::Generators::Base
+      def self.hide!
+        # noop
+      end
+      
       hide!
       source_root(File.expand_path("../templates", __FILE__))
 
