@@ -3,6 +3,10 @@ require "rails/generators"
 module ReactOnRails
   module Generators
     class JsLintersGenerator < Rails::Generators::Base
+      def self.hide!
+        # noop
+      end
+            
       hide!
       source_root File.expand_path("../templates", __FILE__)
 
